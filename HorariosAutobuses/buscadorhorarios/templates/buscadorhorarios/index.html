@@ -1,0 +1,37 @@
+{% extends 'buscadorhorarios/base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'buscadorhorarios/css/jquery-ui.min.css' %}"
+/>
+<script src="{% static 'buscadorhorarios/js/jquery.js' %}"></script>
+<script src="{% static 'buscadorhorarios/js/jquery-ui.min.js' %}"></script>
+{% endblock head %} {% block content %}
+<!-- Main -->
+<main class="container">
+  <article id="search-form" class="grid">
+    <div>
+      <hgroup>
+        <h1>Buscador de Horarios</h1>
+        <h2>{{ error }}</h2>
+      </hgroup>
+      <form method="post">
+        {% csrf_token %} {{ form }}
+        <button type="submit" class="contrast">Buscar</button>
+      </form>
+    </div>
+  </article>
+</main>
+<script>
+  $(function () {
+    $("#id_origen").autocomplete({
+      source: "{% url 'index-page' %}",
+    });
+  });
+  $(function () {
+    $("#id_destino").autocomplete({
+      source: "{% url 'index-page' %}",
+    });
+  });
+</script>
+<!-- ./ Main -->
+{% endblock content %}

@@ -1,0 +1,56 @@
+{% extends 'buscadorhorarios/base.html' %}
+{% block content %}
+ <main class="container">
+      <article  class="grid">
+        <div class="results">
+          <hgroup>
+            <h1>{{estacion_origen}}</h1>
+            <h1>↓</h1>
+            <h1>{{estacion_destino}}</h1>
+            <h2><a href="{% url 'get-vuelta' origen=user_destino destino=user_origen %}">⇄</a></h2>
+          </hgroup>
+          <!-- Tables -->
+          <section id="tables">
+            <figure>
+              <table role="grid">
+                <thead>
+                  <tr>
+                    <th scope="col">Salida - Llegada</th>
+                    <th scope="col">Distancia</th>
+                    <th scope="col">Periodicidad</th>
+                    <th scope="col">Empresa</th>
+                    <th scope="col">Servicio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for salidas, llegadas, servicio, fecha_ruta, kms, empresa, notas, periodicidad in json_trayectos %}
+                  <tr>
+                    <td>
+                      <p class="hora">
+                        <strong>{{salidas}}</strong
+                        ><strong><p id="arrow-phone">↓</p></strong
+                        ><strong>{{llegadas}}</strong>
+                      </p>
+                    </td>
+                    <td>{{kms}} Km</td>
+                    <td>
+                      <strong>{{periodicidad|last}}</strong>
+                      <p id='fecha-ruta'>{{fecha_ruta|first}} {% if fecha_ruta|length == 2 %} y {{fecha_ruta|last}}{% endif %}</p>        
+                      {% if notas != 'None' %}
+                      <p id='notas'>{{notas}}</p>
+                      {% endif %}</td>
+                    <td>{{empresa}}</td>
+                    <td>{{servicio}}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+                </tbody>
+              </table>
+            </figure>
+          </section>
+          <!-- ./ Tables -->
+          <p id="source">Datos extraídos de <a href="http://estacionautobuses.es">estacionautobuses.es</a></p>
+        </div>
+      </article>
+    </main>
+{% endblock content %}

@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{% static 'buscadorhorarios/css/pico.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'buscadorhorarios/css/custom.css' %}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="{% static 'buscadorhorarios/img/favicon.png' %}"
+    />
+    <title>Horarios de Autobuses</title>
+    {% block head %}{% endblock head %}
+  </head>
+  <body>
+    <!-- Nav -->
+    <nav class="container-fluid">
+      <ul>
+        <li>
+          <a href="{% url 'index-page' %}" class="contrast"
+            ><strong>Horarios de Autobuses</strong></a
+          >
+        </li>
+      </ul>
+    </nav>
+    <!-- ./ Nav -->
+    {% block content %} {% endblock content %}
+    <!-- Footer -->
+    <footer class="container-fluid">
+      <small
+        >© {% now "Y" %} •
+        <a href="https://drebollo.dev" class="secondary">drebollo.dev</a></small
+      >
+    </footer>
+    <!-- ./ Footer -->
+  </body>
+</html>
